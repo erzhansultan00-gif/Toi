@@ -3,330 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Той Шақыру</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <title>Әлихан - Сүндет Той</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. PREMIUM ДИЗАЙН (CSS) --- */
+        /* --- 1. LUXURY ДИЗАЙН (CSS) --- */
         :root {
-            --gold: #FFD700;
-            --gold-gradient: linear-gradient(45deg, #FFD700, #FDB931, #FFD700);
-            --dark-blue: #0A192F;
-            --text-color: #333;
-            --bg-pattern: url('https://www.transparenttextures.com/patterns/black-scales.png');
+            --gold: #D4AF37; /* Нағыз алтын түс */
+            --bg-pattern: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
         }
 
         body {
             margin: 0; padding: 0;
-            background-color: #fafafa;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden; /* Артық сырғуды болдырмау */
+            background-color: #FFFAF0; /* Салқын піл сүйегі түсі (Ivory) */
+            background-image: var(--bg-pattern);
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+            text-align: center;
+            overflow-x: hidden;
         }
+
+        /* ОЮЛЫ ЖИЕК (Рамка) */
+        .ornament-border {
+            border: 2px solid var(--gold);
+            margin: 10px;
+            padding: 20px;
+            height: auto;
+            min-height: 95vh;
+            position: relative;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+        /* Бұрыштарына ою қою (CSS арқылы) */
+        .ornament-border::before, .ornament-border::after {
+            content: "✥"; /* Ою символы */
+            font-size: 40px; color: var(--gold);
+            position: absolute; left: 50%; transform: translateX(-50%);
+        }
+        .ornament-border::before { top: -25px; background: #FFFAF0; padding: 0 10px; }
+        .ornament-border::after { bottom: -25px; background: #FFFAF0; padding: 0 10px; }
 
         /* ИНТРО (Дорба) */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1a2a6c, #b21f1f, #fdbb2d); /* Күшті градиент */
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite; /* Фонның түсі ойнап тұрады */
+            background: radial-gradient(circle, #fffaf0, #e6dbc4);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 10000;
-            transition: transform 0.8s ease-in-out, opacity 0.8s;
+            transition: opacity 1s ease;
         }
-
-        @keyframes gradientBG { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
-
-        #dorba-container {
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        #dorba-container:active { transform: scale(0.95); }
 
         #dorba-img {
-            width: 220px;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); /* Алтын көлеңке */
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        .pulse-text {
-            color: white; font-weight: bold; margin-top: 20px; font-size: 1.2rem;
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
-            animation: pulse 1.5s infinite;
-        }
-
-        /* ШАШУ БӨЛШЕКТЕРІ */
-        .confetti {
-            position: absolute; width: 10px; height: 10px;
-            pointer-events: none;
-        }
-
-        /* --- 2. НЕГІЗГІ САЙТ СТИЛІ --- */
-        #main-site {
-            display: none; opacity: 0; transition: opacity 1.5s;
-        }
-
-        /* 3D КАРТОЧКА (Басты фото үшін) */
-        .hero-section {
-            padding: 40px 20px;
-            text-align: center;
-            background: white;
-            perspective: 1000px; /* 3D кеңістік қосу */
-        }
-
-        .photo-card {
-            width: 90%; max-width: 350px; margin: 0 auto;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            border: 4px solid var(--gold);
-            transform-style: preserve-3d; /* 3D сақтау */
-            transition: transform 0.1s; /* Тегіс қозғалыс */
+            width: 250px;
+            cursor: pointer;
+            filter: drop-shadow(0 10px 15px rgba(212, 175, 55, 0.4));
+            animation: bounce 2s infinite;
         }
         
-        .photo-card img {
-            width: 100%; display: block;
-            transform: scale(1.1); /* Сәл үлкейту (параллакс үшін) */
+        .shashu-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px; color: var(--gold); font-weight: bold;
+            margin-top: 20px; letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
+        /* ШАШУ БӨЛШЕКТЕРІ (Emoji) */
+        .confetti {
+            position: absolute;
+            font-size: 25px; /* Кәмпит өлшемі */
+            user-select: none; pointer-events: none;
+            z-index: 10001;
+        }
+
+        /* НЕГІЗГІ МӘТІНДЕР */
         h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; /* Алтын жазу */
-            margin: 20px 0 10px 0;
-            line-height: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 42px; color: var(--gold);
+            margin: 10px 0; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 2px solid var(--gold);
+            display: inline-block; padding-bottom: 10px;
         }
-
-        /* SCROLL ANIMATION (Сырғып шығу) */
-        .reveal {
-            position: relative; transform: translateY(100px); opacity: 0;
-            transition: all 1s ease;
+        h2 { font-family: 'Playfair Display', serif; color: #333; font-size: 28px; margin-top: 40px; }
+        p { font-size: 16px; line-height: 1.6; color: #666; }
+        
+        /* ФОТО СТИЛІ */
+        .photo-frame {
+            width: 80%; max-width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            background: white;
+            border: 1px solid var(--gold);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(-2deg); /* Сәл қисайту (эффект) */
         }
-        .reveal.active { transform: translateY(0); opacity: 1; }
+        .photo-frame img { width: 100%; display: block; }
 
         /* ТАЙМЕР */
-        .timer-grid {
+        .timer-box {
             display: flex; justify-content: center; gap: 15px; margin: 30px 0;
         }
-        .time-box {
-            background: var(--dark-blue); color: var(--gold);
-            padding: 15px; border-radius: 10px; min-width: 60px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border: 1px solid var(--gold);
+        .t-unit {
+            border: 1px solid var(--gold); padding: 10px 15px;
+            min-width: 50px; border-radius: 5px;
         }
-        .time-box span { font-size: 1.5rem; font-weight: bold; display: block; }
+        .t-unit span { font-size: 24px; font-weight: bold; color: var(--gold); display: block; font-family: 'Playfair Display'; }
 
-        /* TIMELINE (Оңнан, солдан шығу) */
-        .timeline-item {
-            background: white; padding: 20px; margin: 20px; border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--gold);
-            display: flex; align-items: center; gap: 15px;
+        /* БАҒДАРЛАМА (Таймлайн) */
+        .program-list {
+            text-align: left; max-width: 400px; margin: 0 auto;
+            position: relative; border-left: 2px solid var(--gold);
+            padding-left: 20px;
         }
-        .icon { font-size: 2rem; }
+        .p-item { margin-bottom: 25px; position: relative; }
+        .p-item::before {
+            content: "●"; color: var(--gold); font-size: 20px;
+            position: absolute; left: -26px; top: -2px;
+        }
+        .p-time { font-weight: bold; color: var(--gold); font-family: 'Playfair Display'; font-size: 18px; }
 
-        /* RSVP БЛОК */
-        .rsvp-container {
-            background: var(--dark-blue); color: white;
-            padding: 40px 20px; margin: 20px; border-radius: 20px;
-            text-align: center;
-            border: 2px solid var(--gold);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); /* Алтын сәуле */
+        /* RSVP ФОРМА */
+        .rsvp-card {
+            background: white; border: 1px solid var(--gold);
+            padding: 30px; margin: 20px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        
         input, select {
-            width: 90%; padding: 15px; margin: 10px 0; border-radius: 50px; border: none; outline: none;
-            font-family: 'Montserrat', sans-serif;
+            width: 90%; padding: 12px; margin: 10px 0;
+            border: 1px solid #ddd; border-bottom: 2px solid var(--gold);
+            font-family: 'Open Sans', sans-serif;
+            background: #FFFAF0;
         }
-        
-        button.glow-btn {
-            background: var(--gold-gradient); color: var(--dark-blue);
-            font-weight: bold; padding: 15px 50px; border: none; border-radius: 50px;
-            font-size: 1.2rem; cursor: pointer; margin-top: 15px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            animation: pulse 2s infinite;
+        button {
+            background-color: var(--gold); color: white;
+            border: none; padding: 15px 40px;
+            font-family: 'Playfair Display', serif; font-size: 18px;
+            letter-spacing: 2px; cursor: pointer;
+            transition: 0.3s;
         }
+        button:hover { background-color: #b89628; }
 
-        /* Анимациялар */
-        @keyframes floating { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-15px);} }
-        @keyframes pulse { 0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);} }
-        @keyframes spin { 100% {transform: rotate(360deg);} }
+        /* АНИМАЦИЯЛАР */
+        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 1.5s ease-in; }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
 
     </style>
 </head>
 <body>
 
     <div id="intro-overlay">
-        <div id="dorba-container">
-            <img src="dorba.png" id="dorba-img" alt="Дорба">
-        </div>
-        <div class="pulse-text">Шашуды алу үшін басыңыз! 👇</div>
+        <img src="image_3.png.jpeg" id="dorba-img" alt="Дорба">
+        <div class="shashu-text">Шашуды алу үшін басыңыз</div>
     </div>
 
     <audio id="bgMusic" src="music.mp3" loop></audio>
 
-    <div id="main-site">
-        
-        <div class="hero-section">
-            <div class="photo-card" id="card3d">
+    <div id="main-content" class="hidden">
+        <div class="ornament-border fade-in">
+            
+            <div class="photo-frame">
                 <img src="image_0.png.jpeg" alt="Басты фото">
             </div>
-            
-            <div class="reveal">
-                <h1>Әлихан</h1>
-                <p style="font-size: 1.2rem; letter-spacing: 2px;">СҮНДЕТ ТОЙЫ</p>
-                <img src="https://i.imgur.com/4l5e85p.png" width="50" style="margin-top:10px;"> </div>
-        </div>
 
-        <div class="reveal">
-            <div class="timer-grid">
-                <div class="time-box"><span id="days">00</span>күн</div>
-                <div class="time-box"><span id="hours">00</span>сағ</div>
-                <div class="time-box"><span id="min">00</span>мин</div>
-                <div class="time-box"><span id="sec">00</span>сек</div>
+            <p style="letter-spacing: 3px; font-size: 14px; text-transform: uppercase;">Құрметті ағайын!</p>
+            <h1>Әлихан</h1>
+            <p style="font-style: italic; font-family: 'Playfair Display'; font-size: 20px; color: var(--gold);">Сүндет тойына шақырамыз!</p>
+
+            <div class="timer-box">
+                <div class="t-unit"><span id="days">00</span>күн</div>
+                <div class="t-unit"><span id="hours">00</span>сағ</div>
+                <div class="t-unit"><span id="min">00</span>мин</div>
             </div>
-        </div>
 
-        <div style="background: white; padding: 20px 0;">
-            <h2 style="text-align: center; color: var(--dark-blue);">Той Бағдарламасы</h2>
-            
-            <center><img src="image_1.png.jpeg" class="reveal" width="150" style="border-radius: 50%; border: 3px solid var(--gold);"></center>
+            <hr style="border: 0; border-top: 1px solid #ddd; width: 50%; margin: 30px auto;">
 
-            <div class="container" style="max-width: 600px; margin: 0 auto;">
-                <div class="timeline-item reveal">
-                    <div class="icon">🏠</div>
-                    <div><strong>18:00</strong><br>Қонақтарды қарсы алу</div>
+            <img src="image_1.png.jpeg" style="width: 120px; border-radius: 50%; border: 3px solid var(--gold); padding: 3px;" alt="Балақай">
+
+            <h2>Бағдарламада:</h2>
+            <div class="program-list">
+                <div class="p-item">
+                    <span class="p-time">18:00</span> <br> Қонақтарды қарсы алу
                 </div>
-                <div class="timeline-item reveal">
-                    <div class="icon">🍬</div>
-                    <div><strong>19:00</strong><br>Шашу & Тойдың ашылуы</div>
+                <div class="p-item">
+                    <span class="p-time">19:00</span> <br> Тойдың салтанатты ашылуы
                 </div>
-                <div class="timeline-item reveal">
-                    <div class="icon">🐎</div>
-                    <div><strong>19:30</strong><br>Атқа мінгізу рәсімі</div>
+                <div class="p-item">
+                    <span class="p-time">19:30</span> <br> Атқа мінгізу рәсімі
+                </div>
+                <div class="p-item">
+                    <span class="p-time">20:00</span> <br> Ас беру, тілектер
                 </div>
             </div>
-        </div>
 
-        <div class="rsvp-container reveal">
-            <h2>Келесіз бе?</h2>
-            <img src="image_2.png.jpeg" width="180" style="margin-bottom: 20px; filter: drop-shadow(0 0 10px white);">
-            
-            <form id="tgForm">
-                <input type="text" id="name" placeholder="Аты-жөніңіз..." required>
-                <select id="status">
-                    <option>Келемін ✅</option>
-                    <option>Жұбайыммен 👫</option>
-                    <option>Келе алмаймын ❌</option>
-                </select>
-                <button type="submit" class="glow-btn">Жіберу</button>
-            </form>
-            <p id="msg" style="display:none; color: #4eff4e; font-weight: bold; margin-top:10px;">Қабылданды! ✅</p>
-        </div>
+            <img src="image_2.png.jpeg" style="width: 200px; margin-top: 30px;" alt="Батыр">
 
-        <br><br>
+            <div class="rsvp-card">
+                <h2 style="margin-top: 0;">Келесіз бе?</h2>
+                <p>Той иелеріне хабарлап қойыңыз:</p>
+                <form id="tgForm">
+                    <input type="text" id="name" placeholder="Аты-жөніңіз..." required>
+                    <select id="status">
+                        <option>Келемін ✅</option>
+                        <option>Жұбайыммен 👫</option>
+                        <option>Келе алмаймын ❌</option>
+                    </select>
+                    <button type="submit">ЖІБЕРУ</button>
+                </form>
+                <div id="msg" style="display:none; color: green; font-weight: bold; margin-top: 15px;">Рахмет! Жауабыңыз жеткізілді!</div>
+            </div>
+
+            <p style="font-size: 12px; opacity: 0.6;">Тойдың сәнін келтіріп, уақытында келуіңізді сұраймыз!</p>
+
+        </div>
     </div>
 
     <script>
-        // 1. CONFIG
+        // 1. БОТ МӘЛІМЕТТЕРІ (ТОЛТЫРЫҢЫЗ)
         const BOT_TOKEN = "ОСЫ_ЖЕРГЕ_ТОКЕН";
         const CHAT_ID = "ОСЫ_ЖЕРГЕ_ID";
-        const TOY_DATE = "Feb 20, 2026 18:00:00";
+        const TOY_DATE = "Feb 20, 2026 18:00:00"; // Той күні
 
-        // --- ШАШУ АНИМАЦИЯСЫ ---
-        const dorba = document.getElementById('dorba-container');
+        // Элементтер
+        const dorba = document.getElementById('dorba-img');
         const overlay = document.getElementById('intro-overlay');
-        const mainSite = document.getElementById('main-site');
+        const mainContent = document.getElementById('main-content');
         const audio = document.getElementById('bgMusic');
 
-        dorba.addEventListener('click', () => {
-            // Дыбыс
-            audio.play().catch(e=>console.log('Audio blocked'));
+        // --- ШАШУ ЛОГИКАСЫ (ФИЗИКА) ---
+        dorba.addEventListener('click', function() {
+            // Музыка қосу
+            audio.play().catch(e => console.log('Audio error'));
             
             // Дорбаны жою
-            dorba.style.transform = "scale(0) rotate(20deg)";
-            
-            // 100 дана кәмпит шашу
-            for(let i=0; i<100; i++) createConfetti();
+            dorba.style.display = 'none';
+            document.querySelector('.shashu-text').style.display = 'none';
 
+            // 100 дана кәмпит/тиын жасау
+            for (let i = 0; i < 80; i++) {
+                spawnConfetti();
+            }
+
+            // Сайтты ашу (1.2 секундтан кейін)
             setTimeout(() => {
-                overlay.style.opacity = 0; // Фонды өшіру
+                overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
-                    mainSite.style.display = 'block';
-                    setTimeout(() => mainSite.style.opacity = 1, 100);
-                }, 800);
-            }, 1000);
+                    mainContent.classList.remove('hidden');
+                }, 1000);
+            }, 1200);
         });
 
-        function createConfetti() {
-            const c = document.createElement('div');
-            c.classList.add('confetti');
-            // Кездейсоқ пішіндер: дөңгелек немесе шаршы
-            c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0'; 
-            // Кездейсоқ түстер (Алтын, Көк, Қызыл)
-            const colors = ['#FFD700', '#FF4500', '#1E90FF', '#FFF'];
-            c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        function spawnConfetti() {
+            const el = document.createElement('div');
+            el.classList.add('confetti');
+            // Эмоджилер (Нағыз кәмпит сияқты көрінеді)
+            const items = ['🍬', '🍬', '🍫', '🪙', '✨']; 
+            el.innerText = items[Math.floor(Math.random() * items.length)];
             
-            document.body.appendChild(c);
+            document.body.appendChild(el);
 
-            // Физика (қозғалыс)
-            const x = window.innerWidth / 2;
-            const y = window.innerHeight / 2;
-            const destX = (Math.random() - 0.5) * window.innerWidth * 1.5;
-            const destY = (Math.random() - 0.5) * window.innerHeight * 1.5;
-            const rot = Math.random() * 720;
+            // Ортадан бастау
+            const startX = window.innerWidth / 2;
+            const startY = window.innerHeight / 2;
+            el.style.left = startX + 'px';
+            el.style.top = startY + 'px';
 
-            c.style.left = x + 'px';
-            c.style.top = y + 'px';
-            c.style.transition = `all ${1 + Math.random()}s cubic-bezier(0.25, 1, 0.5, 1)`;
-
-            setTimeout(() => {
-                c.style.transform = `translate(${destX}px, ${destY}px) rotate(${rot}deg)`;
-                c.style.opacity = 0;
-            }, 10);
-
-            setTimeout(() => c.remove(), 2000);
-        }
-
-        // --- 3D TILT EFFECT (Жанды Фото) ---
-        const card = document.getElementById('card3d');
-        
-        document.addEventListener('mousemove', (e) => {
-            if(window.getComputedStyle(mainSite).display === 'none') return;
+            // Ұшу бағыты (Random)
+            const angle = Math.random() * Math.PI * 2; // Кез келген бұрышқа
+            const velocity = 5 + Math.random() * 10; // Ұшу күші
             
-            const x = (window.innerWidth / 2 - e.pageX) / 20;
-            const y = (window.innerHeight / 2 - e.pageY) / 20;
-            
-            // Тек картаға әсер ету
-            card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-        });
-        
-        // Телефон үшін (Гироскоп)
-        window.addEventListener('deviceorientation', (e) => {
-             const x = e.gamma / 2; // Еңкейту
-             const y = e.beta / 2;
-             card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-        });
+            let x = 0;
+            let y = 0;
+            let vx = Math.cos(angle) * velocity;
+            let vy = Math.sin(angle) * velocity;
+            let gravity = 0.5; // Төмен тарту күші
 
-        // --- SCROLL REVEAL (Сырғып шығу) ---
-        window.addEventListener('scroll', reveal);
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if(elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
+            // Анимация циклі
+            const interval = setInterval(() => {
+                vx *= 0.96; // Ауа кедергісі
+                vy += gravity; // Гравитация
+                x += vx;
+                y += vy;
+
+                el.style.transform = `translate(${x}px, ${y}px) rotate(${x * 5}deg)`;
+                el.style.opacity = 1 - (Math.abs(y) / (window.innerHeight/1.2)); // Төмен түскен сайын өшу
+
+                // Егер экраннан шығып кетсе - өшіру
+                if (y > window.innerHeight / 1.5) {
+                    clearInterval(interval);
+                    el.remove();
                 }
-            }
+            }, 20);
         }
-        reveal(); // Сайт ашылғанда бір рет тексеру
 
-        // --- TIMER & TELEGRAM (Стандарт код) ---
+        // --- ТАЙМЕР ---
         const countDownDate = new Date(TOY_DATE).getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -334,19 +305,23 @@
             document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
             document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById("min").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("sec").innerText = Math.floor((d % (1000 * 60)) / 1000);
         }, 1000);
 
+        // --- TELEGRAM ---
         document.getElementById('tgForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
             const status = document.getElementById('status').value;
             const btn = this.querySelector('button');
+            
             btn.innerText = "Жіберілуде...";
             
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=🎉 *ЖАҢА ҚОНАҚ!*%0A👤 ${name}%0A📝 ${status}&parse_mode=Markdown`)
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=🎉 *ТОЙ:*%0A👤 ${name}%0A📝 ${status}&parse_mode=Markdown`)
             .then(res => {
-                if(res.ok) { document.getElementById('msg').style.display = 'block'; btn.style.display = 'none'; }
+                if(res.ok) {
+                    document.getElementById('msg').style.display = 'block';
+                    btn.style.display = 'none';
+                }
             });
         });
     </script>
