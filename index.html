@@ -7,23 +7,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. LUXURY ДИЗАЙН (CSS) --- */
+        /* --- НЕГІЗГІ ДИЗАЙН --- */
         :root {
-            --gold: #D4AF37; /* Нағыз алтын түс */
+            --gold: #D4AF37;
             --bg-pattern: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
         }
 
         body {
             margin: 0; padding: 0;
-            background-color: #FFFAF0; /* Салқын піл сүйегі түсі (Ivory) */
+            background-color: #FFFAF0;
             background-image: var(--bg-pattern);
             font-family: 'Open Sans', sans-serif;
             color: #444;
             text-align: center;
-            overflow-x: hidden; /* Артық сырғуды болдырмау */
+            overflow-x: hidden;
         }
 
-        /* ОЮЛЫ ЖИЕК (Рамка) */
+        /* --- РАМКА --- */
         .ornament-border {
             border: 2px solid var(--gold); margin: 10px; padding: 15px;
             min-height: 95vh; position: relative; background: white;
@@ -36,42 +36,64 @@
         }
         .ornament-border::before { top: -20px; } .ornament-border::after { bottom: -20px; }
 
-        /* ИНТРО (ДОРБА) - ТҮЗЕТІЛДІ */
+        /* --- ИНТРО (ДОРБА) --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #fffaf0, #e6dbc4);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 10000; transition: opacity 0.8s ease;
+            z-index: 10000; transition: opacity 1s ease;
         }
         
-        /* Дорбаны әдемілеу үшін дөңгелек контейнер */
-        #dorba-wrapper-rounded {
-            width: 220px; height: 220px;
-            background: white;
-            border-radius: 50%; /* Дөңгелек қылу */
-            border: 4px solid var(--gold);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); /* Алтын көлеңке */
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; /* Шеттерін кесіп тастау */
-            animation: bounce 2s infinite; cursor: pointer;
+        /* Дорба контейнері (домалақ емес, кәдімгі) */
+        #dorba-container {
+            width: 280px; /* Дорба үлкейтілді */
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.2s;
         }
 
+        /* Ең маңызды жері: Ақ фонды жою */
         #dorba-img {
-            width: 90%; height: auto; /* Дөңгелектің ішіне сыйғызу */
+            width: 100%;
+            display: block;
+            mix-blend-mode: multiply; /* Ақ фонды өшіретін команда */
+            filter: contrast(1.1);
         }
         
+        /* Дорбаны басқандағы дірілдеу анимациясы */
+        .shake-animation {
+            animation: shakeHard 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shakeHard {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
         .shashu-text {
             font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold);
-            font-weight: bold; margin-top: 25px; letter-spacing: 1px; text-transform: uppercase;
+            font-weight: bold; margin-top: 10px; letter-spacing: 1px; text-transform: uppercase;
+            animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% {opacity: 1;} 50% {opacity: 0.5;} 100% {opacity: 1;} }
 
-        /* ШАШУ БӨЛШЕКТЕРІ (КӨП КӘМПИТ) */
+        /* --- КӘМПИТТЕР --- */
         .confetti {
-            position: absolute; font-size: 24px;
+            position: absolute; font-size: 28px; /* Кәмпит үлкейтілді */
             user-select: none; pointer-events: none; z-index: 10001;
         }
 
-        /* НЕГІЗГІ МӘТІНДЕР */
+        /* --- НЕГІЗГІ БЕТ СТИЛДЕРІ --- */
         h1 {
             font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold);
             margin: 10px 0; font-weight: 700; text-transform: uppercase;
@@ -79,14 +101,13 @@
         }
         h2 { font-family: 'Playfair Display', serif; color: #333; font-size: 24px; margin-top: 30px; }
         
-        /* ТАЙМЕР (СЕКУНД ҚОСЫЛДЫ, СЫЙДЫРЫЛДЫ) */
+        /* ТАЙМЕР */
         .timer-box {
             display: flex; justify-content: center; gap: 8px; margin: 25px auto; max-width: 350px;
         }
         .t-unit {
             border: 1px solid var(--gold); padding: 8px 5px;
-            flex: 1; /* Тең бөлу */
-            border-radius: 5px; background: #fffaf0;
+            flex: 1; border-radius: 5px; background: #fffaf0;
         }
         .t-unit span { font-size: 20px; font-weight: bold; color: var(--gold); display: block; font-family: 'Playfair Display'; line-height: 1; }
         .t-unit small { font-size: 11px; text-transform: uppercase; }
@@ -100,18 +121,15 @@
         .p-item::before { content: "●"; color: var(--gold); font-size: 18px; position: absolute; left: -21px; top: -3px; }
         .p-time { font-weight: bold; color: var(--gold); font-family: 'Playfair Display'; font-size: 16px; }
 
-        /* АДРЕС БАТЫРМАЛАРЫ (ЖАҢА) */
-        .map-buttons {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;
-        }
+        /* АДРЕС БАТЫРМАЛАРЫ */
+        .map-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn-map {
             text-decoration: none; padding: 10px 20px; border-radius: 30px;
             font-weight: bold; font-size: 14px; transition: 0.3s;
             display: flex; align-items: center; gap: 5px;
         }
-        .btn-2gis { background: #2ecc71; color: white; box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3); }
-        .btn-yandex { background: #f1c40f; color: black; box-shadow: 0 4px 10px rgba(241, 196, 15, 0.3); }
-        .btn-map:hover { transform: translateY(-3px); }
+        .btn-2gis { background: #2ecc71; color: white; }
+        .btn-yandex { background: #f1c40f; color: black; }
 
         /* RSVP ФОРМА */
         .rsvp-card {
@@ -129,10 +147,10 @@
             font-size: 16px; letter-spacing: 1px; cursor: pointer; width: 100%; border-radius: 30px;
         }
 
-        /* АНИМАЦИЯЛАР */
-        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
-        .hidden { display: none; } .fade-in { animation: fadeIn 1s ease-in; }
+        .hidden { display: none; } 
+        .fade-in { animation: fadeIn 1s ease-in; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        
         /* Фото стилі */
         .photo-frame img { width: 80%; max-width: 250px; margin: 15px auto; display: block; border: 3px solid var(--gold); padding: 3px; }
 
@@ -141,7 +159,7 @@
 <body>
 
     <div id="intro-overlay">
-        <div id="dorba-wrapper-rounded">
+        <div id="dorba-container">
             <img src="image_3.png.png" id="dorba-img" alt="Дорба">
         </div>
         <div class="shashu-text">Шашуды алу үшін басыңыз</div>
@@ -190,7 +208,6 @@
                 </div>
             </div>
 
-
             <img src="image_2.png.jpeg" style="width: 180px; margin-top: 30px;" alt="Батыр">
 
             <div class="rsvp-card">
@@ -211,34 +228,46 @@
     </div>
 
     <script>
-        // 1. БОТ МӘЛІМЕТТЕРІ (ТОЛТЫРЫҢЫЗ)
+        // 1. БОТ МӘЛІМЕТТЕРІН ОСЫНДА ЖАЗЫҢЫЗ
         const BOT_TOKEN = "ОСЫ_ЖЕРГЕ_ТОКЕН";
         const CHAT_ID = "ОСЫ_ЖЕРГЕ_ID";
         const TOY_DATE = "Feb 20, 2026 18:00:00"; 
 
         // Элементтер
-        const dorbaBtn = document.getElementById('dorba-wrapper-rounded');
+        const dorbaBox = document.getElementById('dorba-container');
         const overlay = document.getElementById('intro-overlay');
         const mainContent = document.getElementById('main-content');
         const audio = document.getElementById('bgMusic');
 
-        // --- ШАШУ ЛОГИКАСЫ (КӨП КӘМПИТ) ---
-        dorbaBtn.addEventListener('click', function() {
+        // --- ЖАҢА ШАШУ ЛОГИКАСЫ ---
+        dorbaBox.addEventListener('click', function() {
+            // 1. Музыка қосылады
             audio.play().catch(e => console.log('Audio error'));
             
-            // Дорбаны жою
-            dorbaBtn.style.transform = "scale(0)";
-            document.querySelector('.shashu-text').style.opacity = 0;
+            // 2. Дорба жоғалмайды! Ол қатты дірілдейді (Шайқалады)
+            dorbaBox.classList.add('shake-animation');
+            document.querySelector('.shashu-text').style.opacity = 0; // Жазу жоғалады
 
-            // 150 ДАНА КӘМПИТ (КӨБЕЙТІЛДІ)
-            for (let i = 0; i < 150; i++) { spawnConfetti(); }
+            // 3. Кәмпиттер шашылады (1.5 секунд бойы)
+            let confettiInterval = setInterval(() => {
+                spawnConfetti();
+                spawnConfetti();
+            }, 50);
 
+            // 4. Тек 1.5 секундтан кейін барып дорба жоғалады
             setTimeout(() => {
-                overlay.style.opacity = '0';
+                clearInterval(confettiInterval); // Кәмпитті тоқтату
+                dorbaBox.style.transform = "scale(0)"; // Дорба енді жоғалады
+                dorbaBox.style.opacity = "0";
+
+                // Сайтты ашу
                 setTimeout(() => {
-                    overlay.style.display = 'none';
-                    mainContent.classList.remove('hidden');
-                }, 800);
+                    overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        mainContent.classList.remove('hidden');
+                    }, 800);
+                }, 500);
             }, 1500);
         });
 
@@ -254,7 +283,7 @@
             el.style.left = startX + 'px'; el.style.top = startY + 'px';
 
             const angle = Math.random() * Math.PI * 2;
-            const velocity = 7 + Math.random() * 12; // Жылдамырақ ұшу
+            const velocity = 8 + Math.random() * 10;
             
             let x = 0; let y = 0;
             let vx = Math.cos(angle) * velocity; let vy = Math.sin(angle) * velocity;
@@ -268,7 +297,7 @@
             }, 20);
         }
 
-        // --- ТАЙМЕР (СЕКУНДПЕН) ---
+        // --- ТАЙМЕР ---
         const countDownDate = new Date(TOY_DATE).getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -276,7 +305,6 @@
             document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
             document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById("min").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            // Секунд қосылды
             document.getElementById("sec").innerText = Math.floor((d % (1000 * 60)) / 1000);
         }, 1000);
 
