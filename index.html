@@ -2,9 +2,9 @@
 <html lang="kz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Әлихан - Сүндет Той</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
         /* --- 1. LUXURY ДИЗАЙН (CSS) --- */
@@ -20,140 +20,130 @@
             font-family: 'Open Sans', sans-serif;
             color: #444;
             text-align: center;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Артық сырғуды болдырмау */
         }
 
         /* ОЮЛЫ ЖИЕК (Рамка) */
         .ornament-border {
-            border: 2px solid var(--gold);
-            margin: 10px;
-            padding: 20px;
-            height: auto;
-            min-height: 95vh;
-            position: relative;
-            background: white;
+            border: 2px solid var(--gold); margin: 10px; padding: 15px;
+            min-height: 95vh; position: relative; background: white;
             box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
-        /* Бұрыштарына ою қою (CSS арқылы) */
         .ornament-border::before, .ornament-border::after {
-            content: "✥"; /* Ою символы */
-            font-size: 40px; color: var(--gold);
+            content: "✥"; font-size: 30px; color: var(--gold);
             position: absolute; left: 50%; transform: translateX(-50%);
+            background: #FFFAF0; padding: 0 10px;
         }
-        .ornament-border::before { top: -25px; background: #FFFAF0; padding: 0 10px; }
-        .ornament-border::after { bottom: -25px; background: #FFFAF0; padding: 0 10px; }
+        .ornament-border::before { top: -20px; } .ornament-border::after { bottom: -20px; }
 
-        /* ИНТРО (Дорба) */
+        /* ИНТРО (ДОРБА) - ТҮЗЕТІЛДІ */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #fffaf0, #e6dbc4);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 10000;
-            transition: opacity 1s ease;
+            z-index: 10000; transition: opacity 0.8s ease;
+        }
+        
+        /* Дорбаны әдемілеу үшін дөңгелек контейнер */
+        #dorba-wrapper-rounded {
+            width: 220px; height: 220px;
+            background: white;
+            border-radius: 50%; /* Дөңгелек қылу */
+            border: 4px solid var(--gold);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); /* Алтын көлеңке */
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; /* Шеттерін кесіп тастау */
+            animation: bounce 2s infinite; cursor: pointer;
         }
 
         #dorba-img {
-            width: 250px;
-            cursor: pointer;
-            filter: drop-shadow(0 10px 15px rgba(212, 175, 55, 0.4));
-            animation: bounce 2s infinite;
+            width: 90%; height: auto; /* Дөңгелектің ішіне сыйғызу */
         }
         
         .shashu-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px; color: var(--gold); font-weight: bold;
-            margin-top: 20px; letter-spacing: 2px;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold);
+            font-weight: bold; margin-top: 25px; letter-spacing: 1px; text-transform: uppercase;
         }
 
-        /* ШАШУ БӨЛШЕКТЕРІ (Emoji) */
+        /* ШАШУ БӨЛШЕКТЕРІ (КӨП КӘМПИТ) */
         .confetti {
-            position: absolute;
-            font-size: 25px; /* Кәмпит өлшемі */
-            user-select: none; pointer-events: none;
-            z-index: 10001;
+            position: absolute; font-size: 24px;
+            user-select: none; pointer-events: none; z-index: 10001;
         }
 
         /* НЕГІЗГІ МӘТІНДЕР */
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px; color: var(--gold);
-            margin: 10px 0; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px;
-            border-bottom: 2px solid var(--gold);
-            display: inline-block; padding-bottom: 10px;
+            font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold);
+            margin: 10px 0; font-weight: 700; text-transform: uppercase;
+            border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 5px;
         }
-        h2 { font-family: 'Playfair Display', serif; color: #333; font-size: 28px; margin-top: 40px; }
-        p { font-size: 16px; line-height: 1.6; color: #666; }
+        h2 { font-family: 'Playfair Display', serif; color: #333; font-size: 24px; margin-top: 30px; }
         
-        /* ФОТО СТИЛІ */
-        .photo-frame {
-            width: 80%; max-width: 300px;
-            margin: 20px auto;
-            padding: 10px;
-            background: white;
-            border: 1px solid var(--gold);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            transform: rotate(-2deg); /* Сәл қисайту (эффект) */
-        }
-        .photo-frame img { width: 100%; display: block; }
-
-        /* ТАЙМЕР */
+        /* ТАЙМЕР (СЕКУНД ҚОСЫЛДЫ, СЫЙДЫРЫЛДЫ) */
         .timer-box {
-            display: flex; justify-content: center; gap: 15px; margin: 30px 0;
+            display: flex; justify-content: center; gap: 8px; margin: 25px auto; max-width: 350px;
         }
         .t-unit {
-            border: 1px solid var(--gold); padding: 10px 15px;
-            min-width: 50px; border-radius: 5px;
+            border: 1px solid var(--gold); padding: 8px 5px;
+            flex: 1; /* Тең бөлу */
+            border-radius: 5px; background: #fffaf0;
         }
-        .t-unit span { font-size: 24px; font-weight: bold; color: var(--gold); display: block; font-family: 'Playfair Display'; }
+        .t-unit span { font-size: 20px; font-weight: bold; color: var(--gold); display: block; font-family: 'Playfair Display'; line-height: 1; }
+        .t-unit small { font-size: 11px; text-transform: uppercase; }
 
-        /* БАҒДАРЛАМА (Таймлайн) */
+        /* БАҒДАРЛАМА */
         .program-list {
-            text-align: left; max-width: 400px; margin: 0 auto;
-            position: relative; border-left: 2px solid var(--gold);
-            padding-left: 20px;
+            text-align: left; max-width: 350px; margin: 0 auto;
+            position: relative; border-left: 2px solid var(--gold); padding-left: 15px;
         }
-        .p-item { margin-bottom: 25px; position: relative; }
-        .p-item::before {
-            content: "●"; color: var(--gold); font-size: 20px;
-            position: absolute; left: -26px; top: -2px;
+        .p-item { margin-bottom: 20px; position: relative; }
+        .p-item::before { content: "●"; color: var(--gold); font-size: 18px; position: absolute; left: -21px; top: -3px; }
+        .p-time { font-weight: bold; color: var(--gold); font-family: 'Playfair Display'; font-size: 16px; }
+
+        /* АДРЕС БАТЫРМАЛАРЫ (ЖАҢА) */
+        .map-buttons {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;
         }
-        .p-time { font-weight: bold; color: var(--gold); font-family: 'Playfair Display'; font-size: 18px; }
+        .btn-map {
+            text-decoration: none; padding: 10px 20px; border-radius: 30px;
+            font-weight: bold; font-size: 14px; transition: 0.3s;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .btn-2gis { background: #2ecc71; color: white; box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3); }
+        .btn-yandex { background: #f1c40f; color: black; box-shadow: 0 4px 10px rgba(241, 196, 15, 0.3); }
+        .btn-map:hover { transform: translateY(-3px); }
 
         /* RSVP ФОРМА */
         .rsvp-card {
             background: white; border: 1px solid var(--gold);
-            padding: 30px; margin: 20px 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 20px; margin: 30px 5px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         input, select {
-            width: 90%; padding: 12px; margin: 10px 0;
+            width: 90%; padding: 12px; margin: 8px 0;
             border: 1px solid #ddd; border-bottom: 2px solid var(--gold);
-            font-family: 'Open Sans', sans-serif;
-            background: #FFFAF0;
+            font-family: 'Open Sans', sans-serif; background: #FFFAF0;
         }
         button {
-            background-color: var(--gold); color: white;
-            border: none; padding: 15px 40px;
-            font-family: 'Playfair Display', serif; font-size: 18px;
-            letter-spacing: 2px; cursor: pointer;
-            transition: 0.3s;
+            background-color: var(--gold); color: white; border: none;
+            padding: 15px 40px; font-family: 'Playfair Display', serif;
+            font-size: 16px; letter-spacing: 1px; cursor: pointer; width: 100%; border-radius: 30px;
         }
-        button:hover { background-color: #b89628; }
 
         /* АНИМАЦИЯЛАР */
         @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
-        .hidden { display: none; }
-        .fade-in { animation: fadeIn 1.5s ease-in; }
-        @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+        .hidden { display: none; } .fade-in { animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        /* Фото стилі */
+        .photo-frame img { width: 80%; max-width: 250px; margin: 15px auto; display: block; border: 3px solid var(--gold); padding: 3px; }
 
     </style>
 </head>
 <body>
 
     <div id="intro-overlay">
-        <img src="image_3.png.png" id="dorba-img" alt="Дорба">
+        <div id="dorba-wrapper-rounded">
+            <img src="image_3.png.jpeg" id="dorba-img" alt="Дорба">
+        </div>
         <div class="shashu-text">Шашуды алу үшін басыңыз</div>
     </div>
 
@@ -166,41 +156,45 @@
                 <img src="image_0.png.jpeg" alt="Басты фото">
             </div>
 
-            <p style="letter-spacing: 3px; font-size: 14px; text-transform: uppercase;">Құрметті ағайын!</p>
+            <p style="letter-spacing: 2px; font-size: 12px; text-transform: uppercase;">Құрметті ағайын!</p>
             <h1>Әлихан</h1>
-            <p style="font-style: italic; font-family: 'Playfair Display'; font-size: 20px; color: var(--gold);">Сүндет тойына шақырамыз!</p>
+            <p style="font-style: italic; font-family: 'Playfair Display'; font-size: 18px; color: var(--gold);">Сүндет тойына шақырамыз!</p>
 
             <div class="timer-box">
-                <div class="t-unit"><span id="days">00</span>күн</div>
-                <div class="t-unit"><span id="hours">00</span>сағ</div>
-                <div class="t-unit"><span id="min">00</span>мин</div>
+                <div class="t-unit"><span id="days">00</span><small>күн</small></div>
+                <div class="t-unit"><span id="hours">00</span><small>сағ</small></div>
+                <div class="t-unit"><span id="min">00</span><small>мин</small></div>
+                <div class="t-unit"><span id="sec">00</span><small>сек</small></div>
             </div>
 
-            <hr style="border: 0; border-top: 1px solid #ddd; width: 50%; margin: 30px auto;">
+            <hr style="border: 0; border-top: 1px solid #ddd; width: 60%; margin: 25px auto;">
 
-            <img src="image_1.png.jpeg" style="width: 120px; border-radius: 50%; border: 3px solid var(--gold); padding: 3px;" alt="Балақай">
+            <img src="image_1.png.jpeg" style="width: 110px; border-radius: 50%; border: 3px solid var(--gold); padding: 2px;" alt="Балақай">
 
             <h2>Бағдарламада:</h2>
             <div class="program-list">
-                <div class="p-item">
-                    <span class="p-time">18:00</span> <br> Қонақтарды қарсы алу
-                </div>
-                <div class="p-item">
-                    <span class="p-time">19:00</span> <br> Тойдың салтанатты ашылуы
-                </div>
-                <div class="p-item">
-                    <span class="p-time">19:30</span> <br> Атқа мінгізу рәсімі
-                </div>
-                <div class="p-item">
-                    <span class="p-time">20:00</span> <br> Ас беру, тілектер
+                <div class="p-item"><span class="p-time">18:00</span> <br> Қонақтарды қарсы алу</div>
+                <div class="p-item"><span class="p-time">19:00</span> <br> Тойдың салтанатты ашылуы</div>
+                <div class="p-item"><span class="p-time">19:30</span> <br> Атқа мінгізу рәсімі</div>
+                <div class="p-item"><span class="p-time">20:00</span> <br> Ас беру, тілектер</div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h2 style="margin-bottom: 10px;">Той өтетін орын:</h2>
+                <p style="margin: 5px; font-weight: bold;">Алматы қ., "Мейрамхана Атауы"</p>
+                <p style="font-size: 14px; margin-top:0;">(Адресті осы жерге жазыңыз)</p>
+                
+                <div class="map-buttons">
+                    <a href="https://go.2gis.com/" target="_blank" class="btn-map btn-2gis">📍 2GIS арқылы ашу</a>
+                    <a href="https://yandex.kz/maps/" target="_blank" class="btn-map btn-yandex">🚖 Yandex Maps</a>
                 </div>
             </div>
 
-            <img src="image_2.png.jpeg" style="width: 200px; margin-top: 30px;" alt="Батыр">
+
+            <img src="image_2.png.jpeg" style="width: 180px; margin-top: 30px;" alt="Батыр">
 
             <div class="rsvp-card">
                 <h2 style="margin-top: 0;">Келесіз бе?</h2>
-                <p>Той иелеріне хабарлап қойыңыз:</p>
                 <form id="tgForm">
                     <input type="text" id="name" placeholder="Аты-жөніңіз..." required>
                     <select id="status">
@@ -213,8 +207,6 @@
                 <div id="msg" style="display:none; color: green; font-weight: bold; margin-top: 15px;">Рахмет! Жауабыңыз жеткізілді!</div>
             </div>
 
-            <p style="font-size: 12px; opacity: 0.6;">Тойдың сәнін келтіріп, уақытында келуіңізді сұраймыз!</p>
-
         </div>
     </div>
 
@@ -222,82 +214,61 @@
         // 1. БОТ МӘЛІМЕТТЕРІ (ТОЛТЫРЫҢЫЗ)
         const BOT_TOKEN = "ОСЫ_ЖЕРГЕ_ТОКЕН";
         const CHAT_ID = "ОСЫ_ЖЕРГЕ_ID";
-        const TOY_DATE = "Feb 20, 2026 18:00:00"; // Той күні
+        const TOY_DATE = "Feb 20, 2026 18:00:00"; 
 
         // Элементтер
-        const dorba = document.getElementById('dorba-img');
+        const dorbaBtn = document.getElementById('dorba-wrapper-rounded');
         const overlay = document.getElementById('intro-overlay');
         const mainContent = document.getElementById('main-content');
         const audio = document.getElementById('bgMusic');
 
-        // --- ШАШУ ЛОГИКАСЫ (ФИЗИКА) ---
-        dorba.addEventListener('click', function() {
-            // Музыка қосу
+        // --- ШАШУ ЛОГИКАСЫ (КӨП КӘМПИТ) ---
+        dorbaBtn.addEventListener('click', function() {
             audio.play().catch(e => console.log('Audio error'));
             
             // Дорбаны жою
-            dorba.style.display = 'none';
-            document.querySelector('.shashu-text').style.display = 'none';
+            dorbaBtn.style.transform = "scale(0)";
+            document.querySelector('.shashu-text').style.opacity = 0;
 
-            // 100 дана кәмпит/тиын жасау
-            for (let i = 0; i < 80; i++) {
-                spawnConfetti();
-            }
+            // 150 ДАНА КӘМПИТ (КӨБЕЙТІЛДІ)
+            for (let i = 0; i < 150; i++) { spawnConfetti(); }
 
-            // Сайтты ашу (1.2 секундтан кейін)
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
                     mainContent.classList.remove('hidden');
-                }, 1000);
-            }, 1200);
+                }, 800);
+            }, 1500);
         });
 
         function spawnConfetti() {
             const el = document.createElement('div');
             el.classList.add('confetti');
-            // Эмоджилер (Нағыз кәмпит сияқты көрінеді)
-            const items = ['🍬', '🍬', '🍫', '🪙', '✨']; 
+            const items = ['🍬', '🍬', '🍫', '🪙', '✨', '🎉']; 
             el.innerText = items[Math.floor(Math.random() * items.length)];
-            
             document.body.appendChild(el);
 
-            // Ортадан бастау
             const startX = window.innerWidth / 2;
             const startY = window.innerHeight / 2;
-            el.style.left = startX + 'px';
-            el.style.top = startY + 'px';
+            el.style.left = startX + 'px'; el.style.top = startY + 'px';
 
-            // Ұшу бағыты (Random)
-            const angle = Math.random() * Math.PI * 2; // Кез келген бұрышқа
-            const velocity = 5 + Math.random() * 10; // Ұшу күші
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 7 + Math.random() * 12; // Жылдамырақ ұшу
             
-            let x = 0;
-            let y = 0;
-            let vx = Math.cos(angle) * velocity;
-            let vy = Math.sin(angle) * velocity;
-            let gravity = 0.5; // Төмен тарту күші
+            let x = 0; let y = 0;
+            let vx = Math.cos(angle) * velocity; let vy = Math.sin(angle) * velocity;
+            let gravity = 0.6;
 
-            // Анимация циклі
             const interval = setInterval(() => {
-                vx *= 0.96; // Ауа кедергісі
-                vy += gravity; // Гравитация
-                x += vx;
-                y += vy;
-
-                el.style.transform = `translate(${x}px, ${y}px) rotate(${x * 5}deg)`;
-                el.style.opacity = 1 - (Math.abs(y) / (window.innerHeight/1.2)); // Төмен түскен сайын өшу
-
-                // Егер экраннан шығып кетсе - өшіру
-                if (y > window.innerHeight / 1.5) {
-                    clearInterval(interval);
-                    el.remove();
-                }
+                vx *= 0.98; vy += gravity;
+                x += vx; y += vy;
+                el.style.transform = `translate(${x}px, ${y}px) rotate(${x * 10}deg)`;
+                if (y > window.innerHeight) { clearInterval(interval); el.remove(); }
             }, 20);
         }
 
-        // --- ТАЙМЕР ---
+        // --- ТАЙМЕР (СЕКУНДПЕН) ---
         const countDownDate = new Date(TOY_DATE).getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -305,6 +276,8 @@
             document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
             document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById("min").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+            // Секунд қосылды
+            document.getElementById("sec").innerText = Math.floor((d % (1000 * 60)) / 1000);
         }, 1000);
 
         // --- TELEGRAM ---
@@ -313,16 +286,9 @@
             const name = document.getElementById('name').value;
             const status = document.getElementById('status').value;
             const btn = this.querySelector('button');
-            
             btn.innerText = "Жіберілуде...";
-            
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=🎉 *ТОЙ:*%0A👤 ${name}%0A📝 ${status}&parse_mode=Markdown`)
-            .then(res => {
-                if(res.ok) {
-                    document.getElementById('msg').style.display = 'block';
-                    btn.style.display = 'none';
-                }
-            });
+            .then(res => { if(res.ok) { document.getElementById('msg').style.display = 'block'; btn.style.display = 'none'; }});
         });
     </script>
 </body>
